@@ -1,6 +1,10 @@
+require "csv"
 
+@column_headers = []
+clients = [["09/15/2024", "John Smith", 500], 
+          ["09/07/2024", "Susie James", 1500],
+          ["09/25/2024", "David Perry", 250]]
 
-@column_headers = ["date", "name", "amount"]
 
 # display column headers in a list for approval
   def display_headers
@@ -8,7 +12,7 @@
     puts "your current column headers are: "
     @column_headers.each { |header| 
       print "#{column_number}. #{header} \n"
-      column_number += 1
+      column_number += 1 
     }
   end
 
@@ -32,7 +36,17 @@
     response = gets.downcase.chomp!
     add_columns(response) 
 
-  print "then your spreadsheet is ready to print: "
-    display_headers
+  print "then your spreadsheet is ready!"
+
+CSV.open("action_template.csv", "w") do |csv|
+  csv << @column_headers
+  clients.each do |client|
+    csv << client
+  end
+end
+
+# CSV.foreach("action_template.csv", headers: true, header_converters: :symbol) do |row|
+#   clients.each do |client|
+# end
 
 

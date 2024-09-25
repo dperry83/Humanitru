@@ -13,6 +13,7 @@ CSV.foreach("working_with_csv/films.csv", headers: true, header_converters: :sym
   end
 
 
-films_info[1].each do |k,v|
+films_info[2].each do |k,v|
   puts "#{k}: #{v}"
 end
+
